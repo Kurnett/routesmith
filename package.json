@@ -1,0 +1,16 @@
+{
+  "name": "routesmith",
+  "version": "1.0.0",
+  "description": "A simple, lightweight routing solution for Express.",
+  "main": "autorouter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "router",
+    "routing",
+    "express"
+  ],
+  "author": "Kurnett",
+  "license": "ISC"
+}

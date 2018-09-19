@@ -55,7 +55,9 @@ const routes = [
 	{
 		path:'users',
 		controller:<controller object goes here>,
-		middleware:[],
+		middleware:[
+			<middleware objects go here>
+		],
 		data:{
 			id:'userID',
 			model:'Users',
@@ -89,6 +91,10 @@ const routes = [
 		children:[
 			{
 				path:'posts',
+				controller:<controller object goes here>,
+				middleware:[
+					<middleware objects go here>
+				],
 				data:{
 					id:'postID',
 					belongsTo:'userID',
@@ -107,4 +113,11 @@ const routes = [
 		]
 	}
 ]
+```
+Based on this structure, we would have the following routes:
+```bash
+/users
+/users/:userID
+/users/:userID/posts
+/users/:userID/posts/:postID
 ```

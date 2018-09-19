@@ -1,35 +1,35 @@
 module.exports = [
 	{
-		path:'settings',
-		controller:{},
+		path:'users',
+		controller:<controller object goes here>,
 		middleware:[
-			require('../controllers/settingspermissions')
+			<middleware objects go here>
 		],
 		data:{
-			id:'settingID',
-			model:'Settings',
+			id:'userID',
+			model:'Users',
 			required:[
-				'name'
+				'name',
+				'email',
+				'password'
 			],
 			optional:[
 				'description',
-				'ownerID',
-				'public',
-				'unrestricted'
+				'phone',
+				'address'
 			],
 			public:[
-				'id',
 				'name',
 				'description',
-				'ownerID',
-				'public',
-				'unrestricted'
+				'email',
+				'phone',
+				'address'
 			],
 			req:[
 				{
-					name:'ownerID',
+					name:'organizationID',
 					hierarchy:[
-						'user',
+						'org',
 						'id'
 					]
 				}
@@ -37,217 +37,26 @@ module.exports = [
 		},
 		children:[
 			{
-				path:'people',
+				path:'posts',
+				controller:<controller object goes here>,
+				middleware:[
+					<middleware objects go here>
+				],
 				data:{
-					id:'personID',
-					belongsTo:'settingID',
-					model:'People',
+					id:'postID',
+					belongsTo:'userID',
+					model:'Posts',
 					required:[
-						'name'
+						'content'
 					],
-					optional:[
-						'profession',
-						'appearance',
-						'personality',
-						'history'
-					],
+					optional:[],
 					public:[
 						'id',
-						'name',
-						'appearance',
-						'personality',
-						'history'
-					]
-				}
-			},
-			{
-				path:'locations',
-				data:{
-					id:'locationID',
-					belongsTo:'settingID',
-					model:'Locations',
-					required:[
-						'name'
-					],
-					optional:[
-						'type',
-						'description',
-						'history',
-						'population',
-						'populationDensity',
-						'crime',
-						'wealth'
-					],
-					public:[
-						'id',
-						'name',
-						'type',
-						'description',
-						'history',
-						'population',
-						'populationDensity',
-						'crime',
-						'wealth'
-					]
-				}
-			},
-			{
-				path:'civilizations',
-				data:{
-					id:'civilizationID',
-					belongsTo:'settingID',
-					model:'Civilizations',
-					required:[
-						'name'
-					],
-					optional:[
-						'description'
-					],
-					public:[
-						'id',
-						'name',
-						'description',
-						'settingID'
-					]
-				}
-			},
-			{
-				path:'items',
-				data:{
-					id:'itemID',
-					belongsTo:'settingID',
-					model:'Items',
-					required:[
-						'name'
-					],
-					optional:[
-						'type',
-						'appearance',
-						'history'
-					],
-					public:[
-						'id',
-						'name',
-						'type',
-						'appearance',
-						'history'
-					]
-				}
-			},
-			{
-				path:'events',
-				data:{
-					id:'eventID',
-					belongsTo:'settingID',
-					model:'Events',
-					required:[
-						'name'
-					],
-					optional:[
-						'type',
-						'year',
-						'description'
-					],
-					public:[
-						'id',
-						'name',
-						'type',
-						'year',
-						'description'
-					]
-				}
-			},
-			{
-				path:'races',
-				data:{
-					id:'raceID',
-					belongsTo:'settingID',
-					model:'Races',
-					required:[
-						'name'
-					],
-					optional:[
-						'description',
-						'appearance'
-					],
-					public:[
-						'id',
-						'name',
-						'description',
-						'appearance'
-					]
-				}
-			},
-			{
-				path:'creatures',
-				data:{
-					id:'creatureID',
-					belongsTo:'settingID',
-					model:'Creatures',
-					required:[
-						'name'
-					],
-					optional:[
-						'description',
-						'history'
-					],
-					public:[
-						'id',
-						'name',
-						'description',
-						'history'
-					]
-				}
-			},
-			{
-				path:'species',
-				data:{
-					id:'speciesID',
-					belongsTo:'settingID',
-					model:'Species',
-					required:[
-						'name'
-					],
-					optional:[
-						'description',
-						'appearance'
-					],
-					public:[
-						'id',
-						'name',
-						'description',
-						'appearance'
-					]
-				}
-			},
-			{
-				path:'spirits',
-				data:{
-					id:'spiritID',
-					belongsTo:'settingID',
-					model:'Spirits',
-					required:[
-						'name'
-					],
-					optional:[
-						'type',
-						'description',
-						'history',
-						'unique'
-					],
-					public:[
-						'id',
-						'name',
-						'description',
-						'history',
-						'unique'
+						'content',
+						'userID'
 					]
 				}
 			}
 		]
-	},
-	{
-		path:'users',
-		id:'userID'
 	}
 ];

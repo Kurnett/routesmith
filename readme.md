@@ -6,6 +6,12 @@ RouteSmith is a simple routing solution for Express-based apps. It creates route
 $ npm install --save routesmith
 ```
 
+##Packages
+[RouteSmith-Sequelize](https://www.npmjs.com/package/routesmith-sequelize) allows developers to easily create controllers to go along with RouteSmith's routes.
+```bash
+$ npm install --save routesmith-sequelize
+```
+
 ##Usage
 ```bash
 const express = require('express');
@@ -18,31 +24,18 @@ router.use('/', rs.Initialize(routes)); // Initialize RouteSmith with your route
 ###Route Data
 RouteSmith requires an array of JSON objects containing specific information to be defined in order to generate routes.
 
+####Path
+The `path` field determines the URL of the endpoints to be generated.
+
+
+####ID
+The `id` field determines the name to be used for the URL parameter (e.g. `/users/:userID`).
+
 ####Controllers
 Controllers are expected to be objects with `create`, `get`, `getAll`, `update`, and `remove` methods, corresponding to basic CRUD operations.
 
 ####Middleware
 Middleware methods can be inserted via the `middleware` array. Middleware is applied to children of each routes - that is, if you have middleware to check for editing permission on one route, that middleware will also check for permissions on all requests to children of that route.
-
-####Data
-The `data` object contains several pieces of information. However, most of the values it contains are not checked by RouteSmith - rather, they are passed into the controller for use later on. This feature will be moved to a separate, but complementary, controller-automation package in the near future.
-
-The `id` field determines the label for parameters in the route's URL. For example, for a route with the `path` `users`, the ID`id:'userID'` would create the following routes:
-
-```bash
-/users
-/users/:userID
-```
-
-The `model` field allows you to define which model will be passed into the controller when the route is accessed, allowing you to find the correct model should the route interact with a database.
-
-The `required` array dictates what values are required in the body of the request. RouteSmith does not validate this - rather, the list is passed to the controller.
-
-The `optional` array dictates what values are optional in the body of the request. RouteSmith does not validate this - rather, the list is passed to the controller.
-
-The `public` array dictates what values are publicly visible in the response to a GET request. RouteSmith does not validate this - rather, the list is passed to the controller.
-
-The `req` array allows developers to define values to look for in the request object, typically added by middleware prior to the route being reached. For example, a global middleware function might retrieve user data and attach it to the request object for future use. The `req` array can then define a new name for the object and the hierarchy through the request object that is needed to retrieve the proper value (for nested values - i.e. `req.user.id`).
 
 ####Children
 The `children` array contains a list of other routes to be created under the original route.
@@ -54,61 +47,36 @@ Child routes do have one additional field in the data object: `belongsTo`. This 
 const routes = [
 	{
 		path:'users',
+		id:'userID',
 		controller:<controller object goes here>,
 		middleware:[
 			<middleware objects go here>
 		],
-		data:{
-			id:'userID',
-			model:'Users',
-			required:[
-				'name',
-				'email',
-				'password'
-			],
-			optional:[
-				'description',
-				'phone',
-				'address'
-			],
-			public:[
-				'name',
-				'description',
-				'email',
-				'phone',
-				'address'
-			],
-			req:[
-				{
-					name:'organizationID',
-					hierarchy:[
-						'org',
-						'id'
-					]
-				}
-			]
-		},
 		children:[
 			{
 				path:'posts',
+				id:'postID',
 				controller:<controller object goes here>,
 				middleware:[
 					<middleware objects go here>
-				],
-				data:{
-					id:'postID',
-					belongsTo:'userID',
-					model:'Posts',
-					required:[
-						'content'
-					],
-					optional:[],
-					public:[
-						'id',
-						'content',
-						'userID'
-					]
-				}
+				]
+			}
+		]
+	}
+]
+```
+If we wished to simplify the route structure further, we could strip out unnecessary data (for example, if we had no middleware to apply).
+```bash
+const routes = [
+	{
+		path:'users',
+		id:'userID',
+		controller:<controller object goes here>
+		children:[
+			{
+				path:'posts',
+				id:'postID',
+				controller:<controller object goes here>
 			}
 		]
 	}

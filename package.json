@@ -1,6 +1,6 @@
 {
   "name": "routesmith",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A simple, lightweight routing solution for Express.",
   "main": "autorouter.js",
   "scripts": {
@@ -19,5 +19,5 @@
     "url":"https://gitlab.com/Kurnett/routesmith.git"
   },
   "author": "Kurnett",
-  "license": "ISC"
+  "license": "MIT"
 }

@@ -9,14 +9,14 @@ autoRouter.router = express.Router({mergeParams:true});
 autoRouter.CreateRoutes = function (routes, pathBase) {
 	routes.forEach((route) => {
 		console.log(pathBase + route.path);
-		if (route.middleware && route.middleware.length > 0 && route.data.id) {
+		if (route.middleware && route.middleware.length > 0 && route.id) {
 			for (let i = 0; i < route.middleware.length; i++) {
-				autoRouter.router.use(pathBase + route.path + '/:' + route.data.id, route.middleware[i]);
+				autoRouter.router.use(pathBase + route.path + '/:' + route.id, route.middleware[i]);
 			}
 		}
 		autoRouter.router.use(pathBase + route.path, require('./default')(route));
-		if (route.children && route.data.id) {
-			let newPathBase = pathBase + route.path + '/:' + route.data.id + '/';
+		if (route.children && route.id) {
+			let newPathBase = pathBase + route.path + '/:' + route.id + '/';
 			autoRouter.CreateRoutes(route.children, newPathBase);
 		}
 	});

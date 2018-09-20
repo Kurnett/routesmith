@@ -1,61 +1,14 @@
 module.exports = [
 	{
 		path:'users',
-		controller:<controller object goes here>,
-		middleware:[
-			<middleware objects go here>
-		],
-		data:{
-			id:'userID',
-			model:'Users',
-			required:[
-				'name',
-				'email',
-				'password'
-			],
-			optional:[
-				'description',
-				'phone',
-				'address'
-			],
-			public:[
-				'name',
-				'description',
-				'email',
-				'phone',
-				'address'
-			],
-			req:[
-				{
-					name:'organizationID',
-					hierarchy:[
-						'org',
-						'id'
-					]
-				}
-			]
-		},
+		id:'userID',
+		controller:require('routesmith-sequelize')(data),
+		middleware:[],
 		children:[
 			{
 				path:'posts',
-				controller:<controller object goes here>,
-				middleware:[
-					<middleware objects go here>
-				],
-				data:{
-					id:'postID',
-					belongsTo:'userID',
-					model:'Posts',
-					required:[
-						'content'
-					],
-					optional:[],
-					public:[
-						'id',
-						'content',
-						'userID'
-					]
-				}
+				controller:{},
+				middleware:[]
 			}
 		]
 	}

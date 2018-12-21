@@ -3,9 +3,6 @@
   "version": "1.0.4",
   "description": "A simple, lightweight routing solution for Express.",
   "main": "autorouter.js",
-  "scripts": {
-    "test": ""
-  },
   "keywords": [
     "router",
     "routing",
@@ -16,8 +13,11 @@
   },
   "repository": {
     "type":"git",
-    "url":"https://gitlab.com/Kurnett/routesmith.git"
+    "url":"https://github.com/Kurnett/routesmith"
   },
   "author": "Kurnett",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kurnett/routesmith-sequelize/issues"
+  }
 }
